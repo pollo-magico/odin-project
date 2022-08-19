@@ -28,6 +28,7 @@ body {
   
   background-color: white;
   border: 0.6vh solid rgb(31, 0, 56);
+  box-shadow: 0 0.5vh rgb(39, 34, 48);
   border-radius: 1.2vh;
 
   position: relative;
@@ -100,6 +101,7 @@ body {
   border-radius: 4vh;
 
   border: 0.6vh solid rgb(31, 0, 56); 
+  box-shadow: 0 0.5vh rgb(39, 34, 48);
 }
 
 .modal-input-text {
