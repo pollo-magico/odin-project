@@ -119,6 +119,7 @@ divide.addEventListener('click', () => {
 });
 
 equals.addEventListener('click', () => {
+  if(currentNumber === '') { return; }
   currentNumber = currentOperation(lastNumber, currentNumber);
   truncateCurrentNumber();
   screen.innerText = currentNumber;
