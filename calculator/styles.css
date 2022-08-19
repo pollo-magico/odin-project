@@ -1,0 +1,373 @@
+@font-face {
+  font-family: 'digital-7regular';
+  src: url('fonts/digital-7-webfont.woff2') format('woff2'),
+       url('fonts/digital-7-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --main-clr-lit: rgb(243, 185, 26);
+  --main-clr-shadow: rgb(192, 116, 3);
+  --dark-clr-lit: rgb(61, 61, 61);
+  --dark-clr-dim: rgb(43, 43, 43);
+  --dark-clr-shadow: rgb(20, 15, 29);
+  --mid-clr-lit: rgb(119, 119, 119);
+  --mid-clr-dim: rgb(88, 88, 88);
+  --mid-clr-shadow: rgb(65, 65, 65);
+  --accent-clr-lit: rgb(69, 38, 209);
+  --accent-clr-dim: rgb(73, 16, 165);
+  --accent-clr-shadow: rgb(109, 14, 146);
+  --accent2-clr-lit: rgb(11, 155, 190);
+  --accent2-clr-dim: rgb(32, 95, 212);
+  --accent2-clr-shadow: rgb(25, 57, 201);
+  --green-clr-lit: rgb(32, 97, 13);
+  --green-clr-highlight: rgb(51, 150, 21);
+
+  --calc-screen-font: 'digital-7regular', Courier, monospace;
+  --calc-button-font: 'digital-7regular', Courier, monospace;
+
+  --calcWidth: 40;
+  --calcWidthPadding: 2;
+  --calcHeight: 10;
+  --calcDepth: 60;
+  --calcDepthPadding: 2;
+  --calcScreenDepth: 20;
+  --calcScreenHeight: 2;
+  --calcScreenBorderHeight: 0.4;
+  --calcScreenBorderSize: 2;
+  --calcScreenElevation: calc(var(--calcHeight)*0.5 + var(--calcScreenHeight) * 0.5);
+  --calcScreenBorderElevation: calc(var(--calcHeight) * 0.5 + (var(--calcScreenHeight) + var(--calcScreenBorderHeight)) * 0.5);
+
+  --calcButtonHeight: 2;
+  --calcButtonDepth: calc(((var(--calcDepth) - var(--calcScreenDepth)) - var(--calcDepthPadding) * 6) / 5);
+  --calcButtonWidth: calc((var(--calcWidth) - var(--calcWidthPadding) * 5) / 4);
+  --calcButtonElevation: calc(var(--calcHeight) * 0.5 + var(--calcButtonHeight) * 0.5);
+}
+
+body {
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  perspective: 500px;
+}
+
+.scene {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: 
+    translate3d(0, 0, 0)
+    rotate3d(1, 0, 0, -60deg);
+}
+
+.button-grid {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.button-row {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.cuboid {
+  --width: 5;
+  --height: 5;
+  --depth: 5;
+  position: absolute;
+  box-sizing: border-box;
+  transform: translate3d(
+    calc(var(--x, 0) * 1vmin), 
+    calc(var(--y, 0) * 1vmin), 
+    calc(var(--z, 0) * 1vmin));
+  transform-style: preserve-3d;
+}
+
+.calc-body {
+  --width: var(--calcWidth);
+  --height: var(--calcHeight);
+  --depth: var(--calcDepth);
+}
+
+.screen {
+  --width: calc(var(--calcWidth) - var(--calcScreenBorderSize) * 2);
+  --height: calc(var(--calcScreenHeight));
+  --depth: calc(var(--calcScreenDepth) - var(--calcScreenBorderSize) * 2);
+
+  --x: 0;
+  --y: calc(var(--calcScreenElevation) * -1);
+  --z: calc(var(--calcDepth) * -0.5 + var(--calcScreenDepth) * 0.5);
+}
+
+.screen-border.top {
+  --width: var(--calcWidth);
+  --height: calc(var(--calcScreenBorderHeight) + var(--calcScreenHeight));
+  --depth: var(--calcScreenBorderSize);
+  
+  --x: 0;
+  --y: calc(var(--calcScreenBorderElevation) * -1);
+  --z: calc(var(--calcDepth) * -0.5 + var(--calcScreenBorderSize) * 0.5);
+}
+
+.screen-border.bottom {
+  --width: var(--calcWidth);
+  --height: calc(var(--calcScreenBorderHeight) + var(--calcScreenHeight));
+  --depth: var(--calcScreenBorderSize);
+  
+  --x: 0;
+  --y: calc(var(--calcScreenBorderElevation) * -1);
+  --z: calc(var(--calcDepth) * -0.5 + var(--calcScreenDepth) - var(--calcScreenBorderSize) * 0.5);
+}
+
+.screen-border.left {
+  --width: var(--calcScreenBorderSize);
+  --height: calc(var(--calcScreenBorderHeight) + var(--calcScreenHeight));
+  --depth: var(--calcScreenDepth);
+  
+  --x: calc(var(--calcWidth) * -0.5 + var(--calcScreenBorderSize) * 0.5);
+  --y: calc(var(--calcScreenBorderElevation) * -1);
+  --z: calc(var(--calcDepth) * -0.5 + var(--calcScreenDepth) * 0.5);
+}
+
+.screen-border.right {
+  --width: var(--calcScreenBorderSize);
+  --height: calc(var(--calcScreenBorderHeight) + var(--calcScreenHeight));
+  --depth: var(--calcScreenDepth);
+  
+  --x: calc(var(--calcWidth) * 0.5 - var(--calcScreenBorderSize) * 0.5);
+  --y: calc(var(--calcScreenBorderElevation) * -1);
+  --z: calc(var(--calcDepth) * -0.5 + var(--calcScreenDepth) * 0.5);
+}
+
+.screen > .face.top {
+  color: rgb(15, 15, 15);
+  background: radial-gradient(farthest-corner, var(--green-clr-highlight), var(--green-clr-lit));
+  font-family: var(--calc-screen-font); 
+  font-size: calc(var(--calcScreenDepth) * 0.4vmin);
+}
+
+.outer-screen-text {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.screen-text {
+  text-overflow: clip;
+  overflow: hidden;
+  float: right;
+  margin: calc(var(--calcScreenDepth) * 0.2vmin) 0;
+  padding: 0 calc(var(--calcWidth) * 0.05vmin);
+}
+
+.button {
+  --width: var(--calcButtonWidth);
+  --height: var(--calcButtonHeight);
+  --depth: var(--calcButtonDepth);
+  --y: calc(var(--calcButtonElevation) * -1);
+
+  left: calc(var(--width) * 0.5vmin);
+}
+
+.button:active {
+  --y: calc(var(--calcHeight) * -0.5);
+  --height: 0.2;
+}
+
+.button.button--wide {
+  --width: calc(var(--calcButtonWidth) * 2 + var(--calcWidthPadding));
+}
+
+.button-row:nth-child(1) {
+  --z: calc(var(--calcDepth) * 0.5 - var(--calcDepthPadding) - var(--calcButtonDepth) * 0.5);
+}
+
+.button-row:nth-child(2) {
+  --z: calc(var(--calcDepth) * 0.5 - var(--calcDepthPadding) * 2 - var(--calcButtonDepth) * 1.5);
+}
+
+.button-row:nth-child(3) {
+  --z: calc(var(--calcDepth) * 0.5 - var(--calcDepthPadding) * 3 - var(--calcButtonDepth) * 2.5);
+}
+
+.button-row:nth-child(4) {
+  --z: calc(var(--calcDepth) * 0.5 - var(--calcDepthPadding) * 4 - var(--calcButtonDepth) * 3.5);
+}
+
+.button-row:nth-child(5) {
+  --z: calc(var(--calcDepth) * 0.5 - var(--calcDepthPadding) * 5 - var(--calcButtonDepth) * 4.5);
+}
+
+.button:nth-child(1) {
+  --x: calc(var(--calcWidth) * -0.5 + var(--calcWidthPadding));
+}
+
+.button:nth-child(2) {
+  --x: calc(var(--calcWidth) * -0.5 + var(--calcWidthPadding) * 2 + var(--calcButtonWidth));
+}
+
+.button:nth-child(3) {
+  --x: calc(var(--calcWidth) * -0.5 + var(--calcWidthPadding) * 3 + var(--calcButtonWidth) * 2);
+}
+
+.button:nth-child(4) {
+  --x: calc(var(--calcWidth) * -0.5 + var(--calcWidthPadding) * 4 + var(--calcButtonWidth) * 3);
+}
+
+.face {
+  position: absolute;
+  opacity: 1;
+  outline: 1px solid transparent;
+}
+
+.button > .face.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: var(--calc-button-font);
+  font-size: calc(var(--calcButtonDepth) * 0.7vmin);
+}
+
+.face.front {
+  width: calc(var(--width) * 1vmin);
+  height: calc(var(--height) * 1vmin);
+  background: red;
+  transform:
+    translate3d(-50%, -50%, calc(var(--depth) * 0.5vmin));
+}
+
+.face.back {
+  width: calc(var(--width) * 1vmin);
+  height: calc(var(--height) * 1vmin);
+  background: orange;
+  transform:
+    translate3d(-50%, -50%, calc(var(--depth) * -0.5vmin));
+}
+
+.face.bottom {
+  width: calc(var(--width) * 1vmin);
+  height: calc(var(--depth) * 1vmin);
+  background-color: yellow;
+  transform: 
+    translate3d(-50%, -50%, 0)
+    rotateX(90deg);
+  top: calc(var(--height) * 0.5vmin);
+}
+
+.face.top {
+  width: calc(var(--width) * 1vmin);
+  height: calc(var(--depth) * 1vmin);
+  background-color: greenyellow;
+  transform: 
+    translate3d(-50%, -50%, 0)
+    rotateX(90deg);
+  top: calc(var(--height) * -0.5vmin);
+}
+
+.face.left {
+  width: calc(var(--depth) * 1vmin);
+  height: calc(var(--height) * 1vmin);
+  background-color: aqua;
+  transform:
+    translate3d(-50%, -50%, 0) 
+    rotateY(90deg);
+  left: calc(var(--width) * -0.5vmin);
+}
+
+.face.right {
+  width: calc(var(--depth) * 1vmin);
+  height: calc(var(--height) * 1vmin);
+  background-color: blue;
+  transform:
+    translate3d(-50%, -50%, 0) 
+    rotateY(90deg);
+  left: calc(var(--width) * 0.5vmin);
+}
+
+.calc-body > .face.top, .screen-border > .face.top {
+  background-color: var(--main-clr-lit);
+}
+
+.calc-body > .face.front, .screen-border > .face.front {
+  background-color: var(--main-clr-shadow); 
+}
+
+.calc-body > .face.left, .screen-border > .face.left {
+  background-color: var(--main-clr-shadow); 
+}
+
+.calc-body > .face.right, .screen-border > .face.right {
+  background-color: var(--main-clr-dim); 
+}
+
+.num-button > .face.top {
+  background-color: var(--dark-clr-lit);
+}
+
+.num-button > .face.right {
+  background-color: var(--dark-clr-dim);
+}
+
+.num-button > .face.front {
+  background-color: var(--dark-clr-shadow);
+}
+
+.num-button > .face.left {
+  background-color: var(--dark-clr-shadow);
+}
+
+
+.point-button > .face.top {
+  background-color: var(--mid-clr-lit);
+}
+
+.point-button > .face.right {
+  background-color: var(--mid-clr-dim);
+}
+
+.point-button > .face.front {
+  background-color: var(--mid-clr-shadow);
+}
+
+.point-button > .face.left {
+  background-color: var(--mid-clr-shadow);
+}
+
+
+.op-button > .face.top {
+  background-color: var(--accent-clr-lit);
+}
+
+.op-button > .face.right {
+  background-color: var(--accent-clr-dim);
+}
+
+.op-button > .face.front {
+  background-color: var(--accent-clr-shadow);
+}
+
+.op-button > .face.left {
+  background-color: var(--accent-clr-shadow);
+}
+
+
+.special-button > .face.top {
+  background-color: var(--accent2-clr-lit);
+}
+
+.special-button > .face.right {
+  background-color: var(--accent2-clr-dim);
+}
+
+.special-button > .face.front {
+  background-color: var(--accent2-clr-shadow);
+}
+
+.special-button > .face.left {
+  background-color: var(--accent2-clr-shadow);
+}

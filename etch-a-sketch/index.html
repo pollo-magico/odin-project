@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+  <title>Etch-a-sketch 🖌️</title>
+</head>
+<body>
+  <div id="center" draggable="false">
+    <div id="board" draggable="false">
+    </div>
+    <div class="centered-buttons" draggable="false">
+      <button id="clear" draggable="false">Clear</button>
+      <button id="resize" draggable="false">Resize</button>
+    </div>
+  </div>
+  <div id="resize-modal" class="modal" hidden>
+    <div class="modal-bg"></div>
+    <div class="modal-body">
+      <div class="modal-panel">
+        <h3 class="modal-title">Resize canvas</h3>
+        <div class="range-container">
+          <input type="range" min="1" max="128" step='1' class="input-range" id="resize-modal-input">
+          <p class="input-range-text">128</p>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-warning-container">
+            <div class="modal-warning" id="resize-modal-warning" hidden>
+              <h5 class="modal-warning-title">Warning</h5>
+              <p class="modal-warning-text">Performance may suffer at high resolutions.</p>
+            </div>
+          </div>
+          <div class="modal-buttons">
+            <button class="modal-button" id="resize-modal-cancel">Cancel</button>
+            <button class="modal-button" id="resize-modal-confirm">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
