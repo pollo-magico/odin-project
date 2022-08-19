@@ -17,10 +17,10 @@
   --mid-clr-shadow: rgb(65, 65, 65);
   --accent-clr-lit: rgb(69, 38, 209);
   --accent-clr-dim: rgb(73, 16, 165);
-  --accent-clr-shadow: rgb(109, 14, 146);
+  --accent-clr-shadow: rgb(51, 20, 110);
   --accent2-clr-lit: rgb(11, 155, 190);
   --accent2-clr-dim: rgb(32, 95, 212);
-  --accent2-clr-shadow: rgb(25, 57, 201);
+  --accent2-clr-shadow: rgb(25, 87, 201);
   --green-clr-lit: rgb(32, 97, 13);
   --green-clr-highlight: rgb(51, 150, 21);
 
@@ -46,7 +46,7 @@
 }
 
 body {
-  background-color: #000;
+  background-color: rgb(231, 230, 210);
   min-height: 100vh;
   display: flex;
   justify-content: center;

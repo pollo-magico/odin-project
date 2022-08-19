@@ -1,4 +1,5 @@
 const screen = document.querySelector(".screen-text");
+const buttons = document.querySelectorAll(".button");
 
 const point = document.querySelector(".point");
 const one = document.querySelector(".one");
@@ -21,6 +22,9 @@ const clear = document.querySelector(".clear");
 const opposite = document.querySelector(".opposite");
 const percent = document.querySelector(".percent");
 const equals = document.querySelector(".equals");
+
+const clickSound = new Audio("./audio/click.mp3");
+clickSound.volume = 0.2;
 
 screen.innerText = '';
 
@@ -140,4 +144,10 @@ percent.addEventListener('click', () => {
     truncateCurrentNumber();
     screen.innerText = currentNumber;
   }
+});
+
+buttons.forEach((b) => {
+  b.addEventListener('mousedown', () => {
+    clickSound.cloneNode().play();
+  });
 });
