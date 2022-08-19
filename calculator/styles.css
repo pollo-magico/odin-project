@@ -175,8 +175,13 @@ body {
 }
 
 .button:active {
-  --y: calc(var(--calcHeight) * -0.5);
   --height: 0.2;
+  --y: calc(var(--calcHeight) * -0.5 - var(--height));
+}
+
+.button.active {
+  --height: 0.2;
+  --y: calc(var(--calcHeight) * -0.5 - var(--height));
 }
 
 .button.button--wide {

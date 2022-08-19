@@ -153,46 +153,78 @@ buttons.forEach((b) => {
   });
 });
 
-document.onkeydown = (key) => {
-  key = key || window.event;
+const triggerMouseEvent = (node, eventType) => {
+  var clickEvent = document.createEvent ('MouseEvents');
+  clickEvent.initEvent (eventType, true, true);
+  node.dispatchEvent (clickEvent);
+}
+
+
+const getButtonFromKeyEvent = (key) => {
+  let button;
   switch(key.code) {
     case 'Numpad1':
-    case 'Digit1': one.click(); break;
+    case 'Digit1': button = one; break;
     case 'Numpad2':
-    case 'Digit2': two.click(); break;
+    case 'Digit2': button = two; break;
     case 'Numpad3':
-    case 'Digit3': three.click(); break;
+    case 'Digit3': button = three; break;
     case 'Numpad4':
-    case 'Digit4': four.click(); break;
+    case 'Digit4': button = four; break;
     case 'Numpad5':
-    case 'Digit5': five.click(); break;
+    case 'Digit5': button = five; break;
     case 'Numpad6':
-    case 'Digit6': six.click(); break;
+    case 'Digit6': button = six; break;
     case 'Numpad7':
-    case 'Digit7': seven.click(); break;
+    case 'Digit7': button = seven; break;
     case 'Numpad8':
-    case 'Digit8': eight.click(); break;
+    case 'Digit8': button = eight; break;
     case 'Numpad9':
-    case 'Digit9': nine.click(); break;
+    case 'Digit9': button = nine; break;
     case 'Numpad0':
-    case 'Digit0': zero.click(); break;
+    case 'Digit0': button = zero; break;
     case 'NumpadDecimal':
-    case 'Period': point.click(); break;
+    case 'Period': button = point; break;
 
-    case 'NumpadAdd': add.click(); break;
-    case 'NumpadSubstract': substract.click(); break;
-    case 'NumpadDivide': divide.click(); break;
-    case 'NumpadMultiply': multiply.click(); break;
+    case 'NumpadAdd': button = add; break;
+    case 'NumpadSubstract': button = substract; break;
+    case 'NumpadDivide': button = divide; break;
+    case 'NumpadMultiply': button = multiply; break;
     
-    case 'Enter': equals.click(); break;
+    case 'NumpadEnter':
+    case 'Enter': button = equals; break;
+
+    case 'Escape': button = clear; break;
   };
 
   switch(key.key) {
-    case '+': add.click(); break;
-    case '-': substract.click(); break;
-    case '/': divide.click(); break;
-    case '*': multiply.click(); break;
-    case '%': percent.click(); break;
-    case '=': equals.click(); break;
+    case '+': button = add; break;
+    case '-': button = substract; break;
+    case '/': button = divide; break;
+    case '*': button = multiply; break;
+    case '%': button = percent; break;
+    case '=': button = equals; break;
+  }
+  return button;
+};
+
+document.onkeydown = (key) => {
+  key = key || window.event;
+  let button = getButtonFromKeyEvent(key);
+
+  if(button) {
+    button.classList.add('active');
+    triggerMouseEvent(button, 'mousedown');
+  }
+};
+
+document.onkeyup = (key) => {
+  key = key || window.event;
+  let button = getButtonFromKeyEvent(key);
+
+  if(button) {
+    button.classList.remove('active');
+    triggerMouseEvent(button, 'mouseup');
+    button.click();
   }
 };
