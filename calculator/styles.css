@@ -170,7 +170,7 @@ body {
   --height: var(--calcButtonHeight);
   --depth: var(--calcButtonDepth);
   --y: calc(var(--calcButtonElevation) * -1);
-
+  cursor: pointer;
   left: calc(var(--width) * 0.5vmin);
 }
 
