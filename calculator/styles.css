@@ -7,6 +7,7 @@
 }
 
 :root {
+  --bg-clr: rgb(231, 230, 210);
   --main-clr-lit: rgb(243, 185, 26);
   --main-clr-shadow: rgb(192, 116, 3);
   --dark-clr-lit: rgb(61, 61, 61);
@@ -46,7 +47,7 @@
 }
 
 body {
-  background-color: rgb(231, 230, 210);
+  background-color: var(--bg-clr);
   min-height: 100vh;
   display: flex;
   justify-content: center;
