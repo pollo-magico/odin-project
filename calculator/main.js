@@ -152,3 +152,47 @@ buttons.forEach((b) => {
     clickSound.cloneNode().play();
   });
 });
+
+document.onkeydown = (key) => {
+  key = key || window.event;
+  switch(key.code) {
+    case 'Numpad1':
+    case 'Digit1': one.click(); break;
+    case 'Numpad2':
+    case 'Digit2': two.click(); break;
+    case 'Numpad3':
+    case 'Digit3': three.click(); break;
+    case 'Numpad4':
+    case 'Digit4': four.click(); break;
+    case 'Numpad5':
+    case 'Digit5': five.click(); break;
+    case 'Numpad6':
+    case 'Digit6': six.click(); break;
+    case 'Numpad7':
+    case 'Digit7': seven.click(); break;
+    case 'Numpad8':
+    case 'Digit8': eight.click(); break;
+    case 'Numpad9':
+    case 'Digit9': nine.click(); break;
+    case 'Numpad0':
+    case 'Digit0': zero.click(); break;
+    case 'NumpadDecimal':
+    case 'Period': point.click(); break;
+
+    case 'NumpadAdd': add.click(); break;
+    case 'NumpadSubstract': substract.click(); break;
+    case 'NumpadDivide': divide.click(); break;
+    case 'NumpadMultiply': multiply.click(); break;
+    
+    case 'Enter': equals.click(); break;
+  };
+
+  switch(key.key) {
+    case '+': add.click(); break;
+    case '-': substract.click(); break;
+    case '/': divide.click(); break;
+    case '*': multiply.click(); break;
+    case '%': percent.click(); break;
+    case '=': equals.click(); break;
+  }
+};
